@@ -1,0 +1,71 @@
+.Main {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* background-color: rgb(255, 47, 0); */
+}
+.experiment {
+  background-color: cadetblue;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+}
+.zone {
+  height: 100%;
+  width: 80%;
+  background-color: blanchedalmond;
+}
+.Sign {
+  height: 350px;
+  width: 350px;
+}
+.profile {
+  /* background-color: rgb(206, 205, 205); */
+  background-image: url(./Images/profile.jpg);
+  background-position: center;
+  background-size: cover;
+  height: 100px;
+  width: 100px;
+  margin-top: 20px;
+  border-radius: 50%;
+  margin-left: 120px;
+}
+.Button {
+  margin-top: 10px;
+  margin-left:40% ;
+}
+.p {
+  font-size: 20px;
+}
+/* sidebar */
+.sidebar {
+  height: 100%;
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: coral;
+}
+.sidebar a {
+  text-decoration: none;
+  display: flex;
+  line-height: 2.5rem;
+  color: black;
+  font-size: 22px;
+}
+.logo {
+  height: 100px;
+  width: 100px;
+  border-radius: 50px;
+  background-color: aqua;
+  margin-bottom: 100px;
+}
+.logout {
+  margin-top: 150px;
+}
+
+/*  */
+/*  */
