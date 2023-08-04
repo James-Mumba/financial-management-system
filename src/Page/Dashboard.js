@@ -11,8 +11,9 @@ import {
   getDocs,
   where,
   query,
+  deleteDoc,
 } from "firebase/firestore";
-
+import swal from "sweetalert";
 import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
@@ -120,6 +121,65 @@ function Dashboard() {
       }
     });
   }
+
+  function deleteEntry(incomeDocId) {
+    const docId = incomeDocId;
+
+    swal({
+      title: `Delete Entry`,
+      text: `Are you sure you want to delete this Entry?`,
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    }).then((willDelete) => {
+      if (willDelete) {
+        deleteDoc(doc(db, "Income-Data", docId)).then(() => {
+          swal("Deleted", "", "success");
+          swal(`Entry has been deleted!`, {
+            icon: "success",
+          }).then(() => {
+            window.location.reload();
+          });
+        });
+      } else {
+        swal("Cancelled!");
+      }
+    });
+  }
+  // function deleteEntry(incomeDocId) {
+  //   const docId = incomeDocId;
+
+  //   swal({
+  //     title: `Delete Entry`,
+  //     text: `Are you sure you want to delete this Entry`,
+  //     icon: "warning",
+  //     buttons: true,
+  //     dangerMode: true,
+  //   })
+  //     .then((willDelete) => {
+  //       if (willDelete) {
+  //         deleteDoc(doc(db, "Income-Data", docId)).then(() => {
+  //           swal("Delete", "", "success");
+  //           swal(`Entry has been deleted!`, {
+  //             icon: "success",
+  //           })
+  //             .then(() => {
+  //               window.location.reload();
+  //             })
+  //             .catch((error) => {
+  //               const errorMessage = error.message;
+  //               console.log(errorMessage);
+  //             });
+  //         });
+  //       } else {
+  //         swal("Cancelled!");
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       const errorMessage = error.message;
+  //       console.log(errorMessage);
+  //     });
+  // }
   return (
     <div className="experiment">
       <Sidebar />
@@ -169,14 +229,22 @@ function Dashboard() {
             </tr>
           </thead>
           <tbody>
-            {income.map((incomeItems) => {
+            {income.map((incomeItems) => (
               <tr key={Math.random()}>
                 <td>{incomeItems.name}</td>
                 <td>{incomeItems.Quantity}</td>
                 <td>{incomeItems.Amount} </td>
                 <td>{incomeItems.Total}</td>
-              </tr>;
-            })}
+                <td>
+                  <Button
+                    variant="danger"
+                    onClick={() => deleteEntry(incomeItems.incomeDocId)}
+                  >
+                    Delete
+                  </Button>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </Table>
       </div>
